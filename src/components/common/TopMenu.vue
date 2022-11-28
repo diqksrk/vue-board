@@ -49,10 +49,10 @@ export default {
 		}
 	},
 	created() {
-		this.$axios.get('api/server/get_board_info')
-            .then((response) => {
-                this.server_data = response.data
-            })
+		// this.$axios.get('api/server/get_board_info')
+        //     .then((response) => {
+        //         this.server_data = response.data
+        //     })
 	},	
 }
 
