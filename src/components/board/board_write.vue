@@ -56,13 +56,23 @@
 					return
 				}
 
-				//var params = new FormData();
-				//나중에 vue 파일전송 찾아서 해결하기.
-				this.$axios.post('api/server/register_board_content', {boardWriterIdx : parseInt(this.$store.state.user_idx),contentBoardIdx : parseInt(this.$route.params.board_idx) ,boardSubject  : this.board_subject,boardContent : this.board_content, })
+				const FileElement = document.querySelector('#board_file');
+				const formData = new FormData();
+				
+				formData.append("boardWriterIdx", parseInt(this.$store.state.user_idx));
+				formData.append("contentBoardIdx", parseInt(this.$route.params.board_idx));
+				formData.append("boardSubject", this.board_subject);
+				formData.append("boardContent", this.board_content);
+				
+				for(let i = 0; i < FileElement.files.length; i++){
+					formData.append("files", FileElement.files[i]);
+				}
+
+				// this.$axios.post('api/server/register_board_content', {boardWriterIdx : parseInt(this.$store.state.user_idx),contentBoardIdx : parseInt(this.$route.params.board_idx) ,boardSubject  : this.board_subject,boardContent : this.board_content, })
+				this.$axios.post('api/server/register_board_content', formData)
 					.then((response) => {
-						console.log(response)
 						this.server_data = response.data
-						this.$router.push('/board_read/' + this.$route.params.board_idx + '/1/' + response.data)
+						this.$router.push('/board_read/' + formData.get("contentBoardIdx") + '/1/' + response.data)
 					})
 
 				alert('저장되었습니다')

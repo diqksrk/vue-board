@@ -2,7 +2,7 @@
   <div id="app">
     <TopMenu></TopMenu>
     <router-view></router-view>
-    <bottom-info></bottom-info>
+    <!-- <bottom-info></bottom-info> -->
   </div>
 </template>
 
@@ -11,13 +11,14 @@ import VueRouter from 'vue-router'
 import Main from './components/main/Main.vue'
 import BoardMain from './components/board/BoardMain.vue'
 import TopMenu from './components/common/TopMenu.vue'
-import BottomInfo from './components/common/BottomInfo.vue'
+// import BottomInfo from './components/common/BottomInfo.vue'
 import BoardRead from './components/board/board_read.vue'
 import BoardModify from './components/board/board_modify.vue'
 import BoardWrite from './components/board/board_write.vue'
 import BoardLogin from './components/user/login.vue'
 import BoardJoin from './components/user/join.vue'
 import UserModify from './components/user/user_modify.vue'
+import axios from 'axios';
 import Vuex from 'vuex'
 import Vue from 'vue'
 
@@ -54,11 +55,11 @@ const router = new VueRouter({
         {
             path : '/board_delete/:board_idx/:page/:content_idx',
             beforeEnter(to,from,next){
-              this.$axios.post('api/server/delete_content', {contentIdx : this.$route.params.contentIdx})
+              axios.post('api/server/delete_content', {contentIdx : from.params.content_idx})
                 .then((response) => {
                   console.log(response)
                   alert("삭제되었습니다")
-                  next('/board_main' + to.params.board_idx + '/' + to.params.page)
+                  next('/board_main/' + to.params.board_idx + '/' + to.params.page)
                 })
             }
         },
@@ -104,7 +105,7 @@ export default {
   name: 'app',
   components: {
     TopMenu,
-    BottomInfo
+    // BottomInfo
   },
   router : router,
   store : store ,

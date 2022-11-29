@@ -24,7 +24,7 @@
 					</div>
 					<div class="form-group">
 						<label for="board_file" >첨부 이미지</label>
-						<img :src="board_image" width="100%"/>	
+						<img :src="server_data.imageUrl" width="100%"/>	
 						<input type="file" name="board_file" id="board_file" class="form-control" accept="image/*"/>					
 					</div>
 					<div class="form-group">
@@ -78,7 +78,8 @@
 		created() {
 			this.$axios.post('api/server/board/get_content', {contentIdx : this.$route.params.contentIdx})
 					.then((response) => {
-						console.log(response)
+						console.log("good")
+						console.log(response.data)
 						this.server_data = response.data
 					})
 		}

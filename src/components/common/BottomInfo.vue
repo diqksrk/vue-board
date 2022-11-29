@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid bg-dark text-white" style="margin-top:50px;padding-top:30px;padding-bottom:30px">
+    <div class="container-fluid bg-dark text-white" style="margin-top:50px;padding-top:30px;padding-bottom:30px; bottom: 0; position: absolute;">
         <div class="container">
             <p>http://www.softcampus.co.kr</p>
             <p>게시판 예제</p>

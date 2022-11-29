@@ -45,7 +45,7 @@
             }
         },
         created () {
-            this.$axios.get('api/server/get_top_board_list/' + this.board_idx)
+            this.$axios.post('api/server/get_top_board_list', {boardInfoIdx : this.board_idx})
 					.then((response) => {
 						this.server_data = response.data
 					})

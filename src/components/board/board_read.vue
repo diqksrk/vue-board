@@ -22,14 +22,14 @@
 						<label for="board_content">내용</label>
 						<textarea id="board_content" v-model="server_data.contentText" class="form-control" rows="10" style="resize:none" disabled="disabled">본문입니다</textarea>
 					</div>
-					<div class="form-group">
-						<label for="board_file">첨부 이미지</label>
-						<img :src="board_image" width="100%"/>						
+					<label for="board_file" style="text-align: left;">첨부 이미지</label><br/>
+					<div class="form-group" style="text-align: center;">
+						<img :src="server_data.imageUrl" width="50%" />
 					</div>
 					<div class="form-group">
 						<div class="text-right">
 							<router-link :to="'/board_main' + '/'+ $route.params.board_idx +'/' + $route.params.page" class="btn btn-primary">목록보기</router-link>
-							<router-link :to="'/board_modify' + '/' + $route.params.board_idx + '/' + $route.params.page + '/' + $route.params.content_idx " v-if='server_data.contentWriterIdx == $store.state.user_idx' class="btn btn-info">수정하기</router-link>
+							<!-- <router-link :to="'/board_modify' + '/' + $route.params.board_idx + '/' + $route.params.page + '/' + $route.params.content_idx " v-if='server_data.contentWriterIdx == $store.state.user_idx' class="btn btn-info">수정하기</router-link> -->
 							<router-link :to="'/board_delete'+ '/' + $route.params.board_idx + '/' + $route.params.page + '/' + $route.params.content_idx" class="btn btn-danger" v-if='server_data.contentWriterIdx == $store.state.user_idx'>삭제하기</router-link>
 						</div>
 					</div>
@@ -49,9 +49,8 @@
             }
 		},
 		created() {
-			this.$axios.post('api/server/board/get_content', {contentIdx : this.$route.params.contentIdx})
+			this.$axios.post('api/server/board/get_content', {boardInfoIdx : this.$route.params.board_idx, contentIdx : this.$route.params.content_idx})
 					.then((response) => {
-						console.log(response)
 						this.server_data = response.data
 					})
 		},

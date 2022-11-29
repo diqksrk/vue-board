@@ -1,7 +1,7 @@
 <template>
 <!-- 상단 메뉴 부분 -->
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top shadow-lg">
-	<router-link to='/' class="navbar-brand">SoftCampus</router-link>
+	<router-link to='/' class="navbar-brand">KangMinJun</router-link>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
 		<span class="navbar-toggler-icon"></span>        
 	</button>
@@ -49,10 +49,10 @@ export default {
 		}
 	},
 	created() {
-		// this.$axios.get('api/server/get_board_info')
-        //     .then((response) => {
-        //         this.server_data = response.data
-        //     })
+		this.$axios.get('api/server/get_board_info')
+            .then((response) => {
+                this.server_data = response.data
+            })
 	},	
 }
 
